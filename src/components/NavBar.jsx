@@ -100,78 +100,75 @@ const NavBar = ({ pageName }) => {
         </div>
       </div>
       {isOpen && (
-        <div>
-          <div class="flex flex-col w-dvw md:gap-[20px] lg:gap-[50px] items-center justify-start self-stretch shrink-0 relative">
-            <Link
-              to="home"
-              activeClass="active"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
+        <div class="self-center">
+          <div class="flex flex-col gap-4 items-end justify-center relative">
+          <Link
+            to="/"
+            className={`flex-col gap-2.5 items-center justify-center self-stretch shrink-0 relative ${
+              pageName === ""
+                ? "rounded-md border-solid border-[#aa72e5] border-b-[5px] md:border-b-[5px] lg:border-b-[8px] xl:border-b-[10px]"
+                : "hover:rounded-md hover:border-solid hover:border-[#aa72e5] hover:border-b-[5px] hover:md:border-b-[5px] hover:lg:border-b-[8px] hover:xl:border-b-[10px]"
+            }`}
+            style={{
+              transformOrigin: "0 0",
+              transform: "rotate(0deg) scale(1, 1)",
+            }}
+          >
+            <div
+              className="text-[#aa72e5] text-center font-['KaushanScript-Regular',_sans-serif] md:text-lg lg:text-xl xl:text-2xl 
+            font-normal relative"
             >
-              <div class="hover:border-solid hover:border-[#006400] hover:border-b-2 items-center justify-between self-stretch shrink-0 relative">
-                <div class="hover:text-[#006400] text-text-color text-left font-['Inter-Regular',_sans-serif] text-xl font-normal relative">
-                  Home
-                </div>
-              </div>
-            </Link>
-            <Link
-              to="about"
-              activeClass="active"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-            >
-              <div class="hover:border-solid hover:border-[#006400]  hover:border-b-2 flex flex-row items-center justify-between self-stretch shrink-0  relative">
-                <div class="hover:text-[#006400] text-text-color text-left font-['Inter-Regular',_sans-serif] text-xl font-normal relative">
-                  About me
-                </div>
-              </div>
-            </Link>
-            <Link
-              to="skills"
-              activeClass="active"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-            >
-              <div class="hover:border-solid hover:border-[#006400] hover:border-b-2 flex flex-row items-center justify-between self-stretch shrink-0 relative">
-                <div class="hover:text-[#006400] text-text-color text-left font-['Inter-Regular',_sans-serif] text-xl font-normal relative">
-                  Skills
-                </div>
-              </div>
-            </Link>
-            <Link
-              to="portfolio"
-              activeClass="active"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-            >
-              <div class="hover:border-solid hover:border-[#006400] hover:border-b-2 flex flex-row items-center justify-between self-stretch shrink-0 relative">
-                <div class="hover:text-[#006400] text-text-color text-left font-['Inter-Regular',_sans-serif] text-xl font-normal relative">
-                  Portfolio
-                </div>
-              </div>
-            </Link>
-            <Link
-              activeClass="active"
-              to="education"
-              spy={true}
-              smooth={true}
-              offset={-70}
-              duration={500}
-            >
-              <div class="hover:border-solid hover:border-[#006400] hover:border-b-2 flex flex-row items-center justify-between self-stretch shrink-0 relative">
-                <div class="hover:text-[#006400] text-text-color text-left font-['Inter-Regular',_sans-serif] text-xl font-normal relative">
-                  Education
-                </div>
-              </div>
-            </Link>
+              Home
+            </div>
+          </Link>
+          <Link
+            to="/about"
+            className={`flex-col gap-2.5 items-center justify-center self-stretch shrink-0 relative ${
+              pageName === "about"
+                ? "rounded-md border-solid border-[#aa72e5] border-b-[5px] md:border-b-[5px] lg:border-b-[8px] xl:border-b-[10px]"
+                : "hover:rounded-md hover:border-solid hover:border-[#aa72e5] hover:border-b-[5px] hover:md:border-b-[5px] hover:lg:border-b-[8px] hover:xl:border-b-[10px]"
+            }`}
+            style={{
+              transformOrigin: "0 0",
+              transform: "rotate(0deg) scale(1, 1)",
+            }}
+          >
+            <div className="text-[#aa72e5] text-center font-['KaushanScript-Regular',_sans-serif]  md:text-lg lg:text-xl xl:text-2xl  font-normal relative">
+              About
+            </div>
+          </Link>
+          <Link
+            to="/service"
+            className={`flex-col gap-2.5 items-center justify-center self-stretch shrink-0 relative ${
+              pageName === "service"
+                ? "rounded-md border-solid border-[#aa72e5] border-b-[5px] md:border-b-[5px] lg:border-b-[8px] xl:border-b-[10px]"
+                : "hover:rounded-md hover:border-solid hover:border-[#aa72e5] hover:border-b-[5px] hover:md:border-b-[5px] hover:lg:border-b-[8px] hover:xl:border-b-[10px]"
+            }`}
+            style={{
+              transformOrigin: "0 0",
+              transform: "rotate(0deg) scale(1, 1)",
+            }}
+          >
+            <div className="text-[#aa72e5] text-center font-['KaushanScript-Regular',_sans-serif]  md:text-lg lg:text-xl xl:text-2xl  font-normal relative">
+              Service
+            </div>
+          </Link>
+          <Link
+            to="/contact"
+            className={`flex-col gap-2.5 items-center justify-center self-stretch shrink-0 relative ${
+              pageName === "contact"
+                ? "rounded-md border-solid border-[#aa72e5] border-b-[5px] md:border-b-[5px] lg:border-b-[8px] xl:border-b-[10px]"
+                : "hover:rounded-md hover:border-solid hover:border-[#aa72e5] hover:border-b-[5px] hover:md:border-b-[5px] hover:lg:border-b-[8px] hover:xl:border-b-[10px]"
+            }`}
+            style={{
+              transformOrigin: "0 0",
+              transform: "rotate(0deg) scale(1, 1)",
+            }}
+          >
+            <div className="text-[#aa72e5] text-center font-['KaushanScript-Regular',_sans-serif]  md:text-lg lg:text-xl xl:text-2xl  font-normal relative">
+              Contact
+            </div>
+          </Link>
           </div>
         </div>
       )}
