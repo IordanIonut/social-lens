@@ -2,7 +2,7 @@ import React from "react";
 
 const AgeDetector = ({ value, name }) => {
 
-    return (
+  return (
     <div>
       <div className="self-stretch h-[55px] flex flex-row items-end justify-start relative">
         <div className="h-[3px] w-[123px] absolute !m-[0] top-[55px] left-[0px] box-border border-t-[3px] border-dashed border-[#443f76]" />
@@ -14,7 +14,7 @@ const AgeDetector = ({ value, name }) => {
         </div>
       </div>
 
-      {value?.[0]?.map((item, key) => (
+      {value?.map((item, key) => (
         <div className="items-baseline flex flex-col items-center w-[400px] justify-start py-0 px-10 border-l-[3px] border-dashed border-[#443f76]">
           <div className="w-[365px] flex flex-row items-start justify-start py-0 box-border">
             <div className="h-[55px] flex-1 flex flex-row items-end justify-center relative">

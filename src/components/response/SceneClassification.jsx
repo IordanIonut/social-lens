@@ -22,7 +22,7 @@ const SceneClassification = ({ value, name }) => {
             <div className="relative text-2xl">Attributes</div>
           </div>
         </div>
-        {value[0]?.attributes?.map((item) => (
+        {value?.attributes?.map((item) => (
           <div className="px-10 w-full flex flex-row items-start justify-center border-l-[3px] border-dashed border-[#443f76]">
           <div className="h-[55px] flex-1 flex flex-row items-end justify-center relative">
             <div className="h-[58px] w-[3px] absolute  top-[0px] left-[0px] box-border border-r-[3px] border-dashed border-[#443f76]" />
@@ -41,7 +41,7 @@ const SceneClassification = ({ value, name }) => {
             <div className="relative text-2xl">Categpries</div>
           </div>
         </div>
-        {value[0]?.categories?.map((item) => (
+        {value?.categories?.map((item) => (
           <div className="px-10 w-full flex flex-row items-start justify-center border-l-[3px] border-dashed border-[#443f76]">
           <div className="h-[55px] flex-1 flex flex-row items-end justify-center relative">
             <div className="h-[58px] w-[3px] absolute  top-[0px] left-[0px] box-border border-r-[3px] border-dashed border-[#443f76]" />

@@ -1,7 +1,8 @@
 import React from "react";
 
 const FaceDetector = ({ value, name }) => {
-    return (
+
+  return (
     <div>
       <div className="self-stretch h-[55px] flex flex-row items-end justify-start relative">
         <div className="h-[3px] w-[123px] absolute !m-[0] top-[55px] left-[0px] box-border border-t-[3px] border-dashed border-[#443f76]" />
