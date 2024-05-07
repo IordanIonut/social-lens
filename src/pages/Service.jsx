@@ -10,9 +10,8 @@ import {
   APISceneClassification,
 } from "../utils/fetchApi";
 import Swal from "sweetalert2";
-import { useCookies } from 'react-cookie';
 
-const Service = ({cookies, updateCookieValue}) => {
+const Service = ({ cookies, updateCookieValue }) => {
   const [link, setLink] = useState("");
   const [sceneClassification, setSceneClassification] = useState([]);
   const [ageDetector, setAgeDetector] = useState([]);
@@ -32,41 +31,61 @@ const Service = ({cookies, updateCookieValue}) => {
       .then((response) => {
         setSceneClassification(response);
         confirmePopUp();
-        if(cookies?.try_good?.value + 1 <= 10)
+        if (cookies?.try_good?.value + 1 <= 10)
           updateCookieValue(cookies.try_good.value + 1);
-        else 
+        else
           errorPopUp("Try Limit", "You have reached the limit of daily tries.");
         APIAgeDetector("age-detection", res)
           .then((response) => {
             setAgeDetector(response);
           })
           .catch((error) => {
-            errorPopUp("The URL is wrong!", "Please check the URL, don't search for this type of image.", 2000);
+            errorPopUp(
+              "The URL is wrong!",
+              "Please check the URL, don't search for this type of image.",
+              2000
+            );
           });
         APIEmotionDetector("emotion-detection", res)
           .then((response) => {
             setEmotionDetector(response);
           })
           .catch((error) => {
-            errorPopUp("The URL is wrong!", "Please check the URL, don't search for this type of image.", 2000);
+            errorPopUp(
+              "The URL is wrong!",
+              "Please check the URL, don't search for this type of image.",
+              2000
+            );
           });
         APIImageDetector("adult-content", res)
           .then((response) => {
             setImageDetector(response);
           })
           .catch((error) => {
-            errorPopUp("The URL is wrong!", "Please check the URL, don't search for this type of image.", 2000);
+            errorPopUp(
+              "The URL is wrong!",
+              "Please check the URL, don't search for this type of image.",
+              2000
+            );
           });
         APIFaceDetector("face-detection", res)
           .then((response) => {
             setFaceDetector(response);
           })
           .catch((error) => {
-            errorPopUp("The URL is wrong!", "Please check the URL, don't search for this type of image.", 2000);
+            errorPopUp(
+              "The URL is wrong!",
+              "Please check the URL, don't search for this type of image.",
+              2000
+            );
           });
       })
       .catch((error) => {
-        errorPopUp("The URL is wrong!", "Please check the URL, don't search for this type of image.", 2000);
+        errorPopUp(
+          "The URL is wrong!",
+          "Please check the URL, don't search for this type of image.",
+          2000
+        );
       });
   };
 
@@ -117,8 +136,8 @@ const Service = ({cookies, updateCookieValue}) => {
     "Image Detector": imageDetector,
     "Face Detector": faceDetector,
   };
-    console.log(cookies.try_good);
-  
+  console.log(cookies.try_good);
+
   return (
     <div class="bg-[#ffffff] pr-2 pl-2 sm:pr-5 sm:pl-5 md:pr-10 md:pl-10 flex flex-col h-dvh gap-[15px] items-start justify-start relative">
       <NavBar pageName={"service"} />

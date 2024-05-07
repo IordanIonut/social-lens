@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Home from "./pages/Home";
 import About from "./pages/About";
@@ -28,7 +28,7 @@ function App() {
       };
       setCookie("try_good", value);
     }
-  }, []);
+  },);
 
   const updateCookieValue = (newValue: number) => {
     const currentValue =
