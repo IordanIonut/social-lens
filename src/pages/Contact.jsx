@@ -2,7 +2,7 @@ import React from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
 
-const Contact = () => {
+const Contact = ({cookies, updateCookieValue}) => {
   return (
     <div class="bg-[#ffffff] pr-2 pl-2 sm:pr-5 sm:pl-5 md:pr-10 md:pl-10 gap-4 flex flex-col h-dvh justify-between items-start relative">
       <NavBar pageName={"contact"} />
