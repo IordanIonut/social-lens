@@ -7,7 +7,6 @@ import {
   APIEmotionDetector,
   APIFaceDetector,
   APIImageDetector,
-  APILogoDetector,
   APISceneClassification,
 } from "../utils/fetchApi";
 import Swal from "sweetalert2";
@@ -18,7 +17,6 @@ const Service = () => {
   const [ageDetector, setAgeDetector] = useState([]);
   const [emotionDetector, setEmotionDetector] = useState([]);
   const [imageDetector, setImageDetector] = useState([]);
-  const [logoDetector, setLogoDetector] = useState([]);
   const [faceDetector, setFaceDetector] = useState([]);
 
   const handleChangeLink = (value) => {
@@ -112,7 +110,6 @@ const Service = () => {
     "Age Detector": ageDetector,
     "Emotion Detector": emotionDetector,
     "Image Detector": imageDetector,
-    "Logo Detector": logoDetector,
     "Face Detector": faceDetector,
   };
 
