@@ -83,10 +83,10 @@ const Contact = ({ cookies, updateCookieValue }) => {
 
     emailjs.sendForm(process.env.REACT_APP_SERVICE, process.env.REACT_APP_TEMPLATE, form, process.env.REACT_APP_KEY).then(
       (response) => {
-        console.log('SUCCESS!', response.status, response.text);
+        //console.log('SUCCESS!', response.status, response.text);
       },
       (error) => {
-        console.log('FAILED...', error);
+        //console.log('FAILED...', error);
       },
     )
     document.body.removeChild(form);
