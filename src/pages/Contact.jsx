@@ -83,15 +83,33 @@ const Contact = ({ cookies, updateCookieValue }) => {
 
     emailjs.sendForm(process.env.REACT_APP_SERVICE, process.env.REACT_APP_TEMPLATE, form, process.env.REACT_APP_KEY).then(
       (response) => {
-        //console.log('SUCCESS!', response.status, response.text);
+        sendEmail("Email Sent", "Your email has been sent. We will contact you shortly.", "success", "2000");
       },
       (error) => {
-        //console.log('FAILED...', error);
-      },
+        sendEmail("Something Didn't Work", "Please try again later.", "error", "2000");
+      },      
     )
     document.body.removeChild(form);
   }
-
+  const sendEmail = (title, text, icon, time) => {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: icon,
+      timer: time,
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      customClass: {
+        container: "bg-opacity-50 backdrop-filter backdrop-blur-lg",
+        popup: "bg-white shadow-lg",
+        title: "text-red-600",
+        text: "text-gray-800",
+        confirmButton:
+          "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
+      },
+    });
+  };
   
   return (
     <div class="bg-[#ffffff] pr-2 pl-2 sm:pr-5 sm:pl-5 md:pr-10 md:pl-10 gap-4 flex flex-col h-dvh justify-between items-start relative">
