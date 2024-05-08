@@ -1,8 +1,98 @@
 import React from "react";
 import NavBar from "../components/NavBar";
 import Footer from "../components/Footer";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import emailjs from '@emailjs/browser';
 
-const Contact = ({cookies, updateCookieValue}) => {
+const Contact = ({ cookies, updateCookieValue }) => {
+  const {
+    register,
+    handleSubmit,
+  } = useForm();
+
+  const onSubmit = (data) => {
+    console.log(data);
+    if (data?.FirstName === "") {
+      showErrorAlert(
+        "First Name is Incorrect",
+        "Please enter a valid first name again",
+        2000
+      );
+    } else if (data?.LastName === "") {
+      showErrorAlert(
+        "Last Name is Incorrect",
+        "Please enter a valid last name again",
+        2000
+      );
+    } else if (data?.Email === "") {
+      showErrorAlert(
+        "Email is Incorrect",
+        "Please enter a valid email again",
+        2000
+      );
+    } else if (data?.Phone === "") {
+      showErrorAlert(
+        "Phone is Incorrect",
+        "Please enter a valid phone number again",
+        2000
+      );
+    } else if (data?.Message === "") {
+      showErrorAlert(
+        "Message is Incorrect",
+        "Please enter a valid message again",
+        2000
+      );
+    } else {
+      console.log(data);
+      emailSend(data);
+    }
+  };
+
+  const showErrorAlert = (title, text, time) => {
+    Swal.fire({
+      title: title,
+      text: text,
+      icon: "error",
+      timer: time,
+      timerProgressBar: true,
+      allowOutsideClick: false,
+      allowEscapeKey: false,
+      customClass: {
+        container: "bg-opacity-50 backdrop-filter backdrop-blur-lg",
+        popup: "bg-white shadow-lg",
+        title: "text-red-600",
+        text: "text-gray-800",
+        confirmButton:
+          "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
+      },
+    });
+  };
+
+  const emailSend = (data) => {
+    const form = document.createElement('form');
+    form.id = 'myForm';
+      Object.keys(data).forEach(key => {
+      const input = document.createElement('input');
+      input.type = 'hidden';
+      input.name = key;
+      input.value = data[key];
+      form.appendChild(input);
+    });
+      document.body.appendChild(form);
+
+    emailjs.sendForm(process.env.REACT_APP_SERVICE, process.env.REACT_APP_TEMPLATE, form, process.env.REACT_APP_KEY).then(
+      (response) => {
+        console.log('SUCCESS!', response.status, response.text);
+      },
+      (error) => {
+        console.log('FAILED...', error);
+      },
+    )
+    document.body.removeChild(form);
+  }
+
+  
   return (
     <div class="bg-[#ffffff] pr-2 pl-2 sm:pr-5 sm:pl-5 md:pr-10 md:pl-10 gap-4 flex flex-col h-dvh justify-between items-start relative">
       <NavBar pageName={"contact"} />
@@ -97,7 +187,10 @@ const Contact = ({cookies, updateCookieValue}) => {
           <div class="text-[#000000] text-center font-['KaushanScript-Regular',_sans-serif] text-3xl font-normal relative">
             Contact
           </div>
-          <div class="flex flex-col gap-2 md:gap-3 items-center justify-center self-stretch shrink-0 relative">
+          <form id="myForm"
+            onSubmit={handleSubmit(onSubmit)}
+            class="flex flex-col gap-2 md:gap-3 items-center justify-center self-stretch shrink-0 relative"
+          >
             <div class="flex flex-col gap-2 md:gap-3 items-start justify-center self-stretch shrink-0 relative">
               <div class="flex flex-row gap-2 md:gap-3 items-start justify-center self-stretch shrink-0 h-[84px] relative">
                 <div class="self-stretch flex-1 relative overflow-hidden">
@@ -106,9 +199,11 @@ const Contact = ({cookies, updateCookieValue}) => {
                   </div>
                   <div class="bg-[#ffffff] rounded-[36px] border-solid border-[#e2e1e5] border pt-2.5 pr-[15px] pb-2.5 pl-[15px] flex flex-col gap-0 items-start justify-start w-[100%] absolute right-[0%] left-[0%] top-7">
                     <input
-                      type="name"
-                      placeholder="First Name"
-                      class="text-[#d2d2d2] text-left font-['Inter-Regular',_sans-serif] text-sm leading-7 font-normal relative self-stretch w-full"
+                      {...register("FirstName", {
+                        minLength: { value: 7, message: "error message" },
+                        maxLength: { value: 20, message: "error message" },
+                      })}
+                      class="text-[#443F76] text-left font-['Inter-Regular',_sans-serif] text-sm leading-7 font-normal relative self-stretch w-full"
                     />
                   </div>
                 </div>
@@ -118,9 +213,8 @@ const Contact = ({cookies, updateCookieValue}) => {
                   </div>
                   <div class="bg-[#ffffff] rounded-[36px] border-solid border-[#e2e1e5] border pt-2.5 pr-[15px] pb-2.5 pl-[15px] flex flex-col gap-0 items-start justify-start w-[100%] absolute right-[0%] left-[0%] top-7">
                     <input
-                      type="name"
-                      placeholder="First Name"
-                      class="text-[#d2d2d2] text-left font-['Inter-Regular',_sans-serif] text-sm leading-7 font-normal relative w-full"
+                      {...register("LastName", { minLength: 7, maxLength: 20 })}
+                      class="text-[#443F76] text-left font-['Inter-Regular',_sans-serif] text-sm leading-7 font-normal relative w-full"
                     />
                   </div>
                 </div>
@@ -131,9 +225,9 @@ const Contact = ({cookies, updateCookieValue}) => {
                 </div>
                 <div class="bg-[#ffffff] rounded-[36px] border-solid border-[#e2e1e5] border pt-2.5 pr-[15px] pb-2.5 pl-[15px] flex flex-col gap-0 items-start justify-start w-[100%] absolute right-[0%] left-[0%] top-7 ">
                   <input
-                    type="name"
-                    placeholder="First Name"
-                    class="text-[#d2d2d2] text-left font-['Inter-Regular',_sans-serif] text-sm leading-7 font-normal relative w-full"
+                    type="email"
+                    {...register("Email", { pattern: /^\S+@\S+\.\S+$/ })}
+                    class="text-[#443F76] text-left font-['Inter-Regular',_sans-serif] text-sm leading-7 font-normal relative w-full"
                   />
                 </div>
               </div>
@@ -143,9 +237,9 @@ const Contact = ({cookies, updateCookieValue}) => {
                 </div>
                 <div class="bg-[#ffffff] rounded-[36px] border-solid border-[#e2e1e5] border pt-2.5 pr-[15px] pb-2.5 pl-[15px] flex flex-col gap-0 items-start justify-start w-[100%] absolute right-[0%] left-[0%] top-7">
                   <input
-                    type="name"
-                    placeholder="First Name"
-                    class="text-[#d2d2d2] text-left font-['Inter-Regular',_sans-serif] text-sm leading-7 font-normal relative w-full"
+                    type="phone"
+                    {...register("Phone", { minLength: 10, maxLength: 10 })}
+                    class="text-[#443F76] text-left font-['Inter-Regular',_sans-serif] text-sm leading-7 font-normal relative w-full"
                   />
                 </div>
               </div>
@@ -155,14 +249,17 @@ const Contact = ({cookies, updateCookieValue}) => {
                 </div>
                 <div class="bg-[#ffffff] rounded-[36px] border-solid border-[#e2e1e5] border pt-2.5 pr-[15px] pb-2.5 pl-[15px] flex flex-col gap-0 items-start justify-start w-[100%] absolute right-[0%] left-[0%] top-7 ">
                   <input
-                    type="name"
-                    placeholder="First Name"
-                    class="text-[#d2d2d2] text-left font-['Inter-Regular',_sans-serif] text-sm leading-7 font-normal relative w-full"
-                  />{" "}
+                    {...register("Message", {
+                      minLength: 1,
+                      maxLength: 2000000,
+                    })}
+                    class="text-[#443F76] text-left font-['Inter-Regular',_sans-serif] text-sm leading-7 font-normal relative w-full"
+                  />
                 </div>
               </div>
             </div>
-            <div
+            <button
+              type="submit"
               class="bg-[#ffffff] rounded-[20px] border-solid border-[rgba(68,63,118,0.38)] border-t-[5px] border-r-[5px] 
             border-b-[10px] border-l-[5px] flex flex-row items-center justify-between shrink-0 w-[100px] h-[50px] sm:w-[110px] sm:h-[60px] md:w-[150px] 
             md:h-[70px] relative overflow-hidden"
@@ -170,8 +267,8 @@ const Contact = ({cookies, updateCookieValue}) => {
               <div class="text-[#000000] text-center font-['KeaniaOne-Regular',_sans-serif] text-lg sm:xl md:text-3xl font-normal relative flex-1">
                 Send
               </div>
-            </div>
-          </div>
+            </button>
+          </form>
         </div>
       </div>
 

@@ -136,7 +136,6 @@ const Service = ({ cookies, updateCookieValue }) => {
     "Image Detector": imageDetector,
     "Face Detector": faceDetector,
   };
-  console.log(cookies.try_good);
 
   return (
     <div class="bg-[#ffffff] pr-2 pl-2 sm:pr-5 sm:pl-5 md:pr-10 md:pl-10 flex flex-col h-dvh gap-[15px] items-start justify-start relative">
