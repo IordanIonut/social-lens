@@ -103,7 +103,7 @@ const Contact = ({ cookies, updateCookieValue }) => {
       customClass: {
         container: "bg-opacity-50 backdrop-filter backdrop-blur-lg",
         popup: "bg-white shadow-lg",
-        title: "text-red-600",
+        title: icon === "error" ? "text-red-600" : "text-green-600",
         text: "text-gray-800",
         confirmButton:
           "bg-red-600 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
