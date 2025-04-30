@@ -131,9 +131,6 @@ const Service = ({ cookies, updateCookieValue }) => {
     Math.floor(Math.random() * 16777215)
       .toString(16)
       .padStart(6, "0");
-
-  console.log(imageDetector);
-
   return (
     <div class="bg-[#ffffff] pr-2 pl-2 sm:pr-5 sm:pl-5 md:pr-10 md:pl-10 flex flex-col h-dvh gap-[15px] items-start justify-start relative">
       <NavBar pageName={"service"} />
