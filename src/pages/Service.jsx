@@ -4,18 +4,14 @@ import Footer from "../components/Footer";
 import Responce from "../components/Response";
 import {
   APIAgeDetector,
-  APIEmotionDetector,
   APIFaceDetector,
   APIImageDetector,
-  APISceneClassification,
 } from "../utils/fetchApi";
 import Swal from "sweetalert2";
 
 const Service = ({ cookies, updateCookieValue }) => {
   const [link, setLink] = useState("");
-  const [sceneClassification, setSceneClassification] = useState([]);
   const [ageDetector, setAgeDetector] = useState([]);
-  const [emotionDetector, setEmotionDetector] = useState([]);
   const [imageDetector, setImageDetector] = useState([]);
   const [faceDetector, setFaceDetector] = useState([]);
 

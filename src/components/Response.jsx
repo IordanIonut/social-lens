@@ -1,7 +1,5 @@
 import React from "react";
-import SceneClassification from "./response/SceneClassification";
 import AgeDetector from "./response/AgeDetector";
-import EmotionDetector from "./response/EmotionDetector";
 import ImageDetector from "./response/ImageDetector";
 import FaceDetector from "./response/FaceDetector";
 
