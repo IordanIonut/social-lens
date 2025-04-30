@@ -27,36 +27,16 @@ const Service = ({ cookies, updateCookieValue }) => {
     let res = {
       url: link,
     };
-    APISceneClassification("scenery-classify", res)
+    if (cookies?.try_good?.value + 1 <= 10)
+      updateCookieValue(cookies.try_good.value + 1);
+    else {
+      errorPopUp("Try Limit", "You have reached the limit of daily tries.");
+      return;
+    }
+    APIAgeDetector("age-detection", res)
       .then((response) => {
-        setSceneClassification(response);
+        setAgeDetector(response);
         confirmePopUp();
-        if (cookies?.try_good?.value + 1 <= 10)
-          updateCookieValue(cookies.try_good.value + 1);
-        else
-          errorPopUp("Try Limit", "You have reached the limit of daily tries.");
-        APIAgeDetector("age-detection", res)
-          .then((response) => {
-            setAgeDetector(response);
-          })
-          .catch((error) => {
-            errorPopUp(
-              "The URL is wrong!",
-              "Please check the URL, don't search for this type of image.",
-              2000
-            );
-          });
-        APIEmotionDetector("emotion-detection", res)
-          .then((response) => {
-            setEmotionDetector(response);
-          })
-          .catch((error) => {
-            errorPopUp(
-              "The URL is wrong!",
-              "Please check the URL, don't search for this type of image.",
-              2000
-            );
-          });
         APIImageDetector("adult-content", res)
           .then((response) => {
             setImageDetector(response);
@@ -130,9 +110,9 @@ const Service = ({ cookies, updateCookieValue }) => {
   };
 
   const val = {
-    "Scene Classification": sceneClassification,
+    // "Scene Classification": sceneClassification,
     "Age Detector": ageDetector,
-    "Emotion Detector": emotionDetector,
+    // "Emotion Detector": emotionDetector,
     "Image Detector": imageDetector,
     "Face Detector": faceDetector,
   };

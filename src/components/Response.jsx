@@ -9,8 +9,8 @@ const Responce = ({ val }) => {
   return (
     <>
       {val?.["Age Detector"]?.length !== 0 &&
-      val?.["Scene Classification"]?.length !== 0 &&
-      val?.["Emotion Detector"]?.length !== 0 &&
+      // val?.["Scene Classification"]?.length !== 0 &&
+      // val?.["Emotion Detector"]?.length !== 0 &&
       val?.["Image Detector"]?.length !== 0 &&
       val?.["Face Detector"]?.length !== 0 ? (
         <div
@@ -32,15 +32,15 @@ const Responce = ({ val }) => {
               value={val["Image Detector"]}
               name={"Image Detector"}
             />
-            <EmotionDetector
-              value={val["Emotion Detector"]}
-              name={"Emotion Detector"}
-            />
+            {/* < <EmotionDetector
+                value={val["Emotion Detector"]}
+                name={"Emotion Detector"}
+              /> */}
             <AgeDetector value={val["Age Detector"]} name={"Age Detector"} />
-            <SceneClassification
-              value={val["Scene Classification"]}
-              name={"Scene Classification"}
-            />
+            {/* <SceneClassification
+                value={val["Scene Classification"]}
+                name={"Scene Classification"}
+              /> */}
           </div>
         </div>
       ) : (
