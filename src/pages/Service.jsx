@@ -132,6 +132,8 @@ const Service = ({ cookies, updateCookieValue }) => {
       .toString(16)
       .padStart(6, "0");
 
+  console.log(imageDetector);
+
   return (
     <div class="bg-[#ffffff] pr-2 pl-2 sm:pr-5 sm:pl-5 md:pr-10 md:pl-10 flex flex-col h-dvh gap-[15px] items-start justify-start relative">
       <NavBar pageName={"service"} />
@@ -160,14 +162,57 @@ const Service = ({ cookies, updateCookieValue }) => {
                 }}
               />
 
-              {faceDetector.map((face, index) => {
-                const { rectangle, landmarks } = face;
-                const boxLeft = rectangle.left * scale;
-                const boxTop = rectangle.top * scale;
-                const boxWidth = (rectangle.right - rectangle.left) * scale;
-                const boxHeight = (rectangle.bottom - rectangle.top) * scale;
+              {faceDetector.length > 0 &&
+                faceDetector.map((face, index) => {
+                  const { rectangle, landmarks } = face;
+                  const boxLeft = rectangle.left * scale;
+                  const boxTop = rectangle.top * scale;
+                  const boxWidth = (rectangle.right - rectangle.left) * scale;
+                  const boxHeight = (rectangle.bottom - rectangle.top) * scale;
+
+                  const randomColor = getRandomColor();
+                  return (
+                    <React.Fragment key={index}>
+                      <div
+                        style={{
+                          position: "absolute",
+                          left: `${boxLeft}px`,
+                          top: `${boxTop}px`,
+                          width: `${boxWidth}px`,
+                          height: `${boxHeight}px`,
+                          border: `2px solid ${randomColor}`,
+                          boxSizing: "border-box",
+                        }}
+                      />
+                      {Object.entries(landmarks).map(([label, { x, y }]) => (
+                        <div
+                          key={`${index}-${label}`}
+                          style={{
+                            position: "absolute",
+                            left: `${x * scale}px`,
+                            top: `${y * scale}px`,
+                            width: "6px",
+                            height: "6px",
+                            backgroundColor: "blue",
+                            borderRadius: "50%",
+                            transform: "translate(-50%, -50%)",
+                          }}
+                          title={label}
+                        />
+                      ))}
+                    </React.Fragment>
+                  );
+                })}
+
+              {imageDetector.objects.map((object, index) => {
+                const [left, top, right, bottom] = object.box;
+                const boxLeft = left * scale;
+                const boxTop = top * scale;
+                const boxWidth = (right - left) * scale;
+                const boxHeight = (bottom - top) * scale;
 
                 const randomColor = getRandomColor();
+
                 return (
                   <React.Fragment key={index}>
                     <div
@@ -181,22 +226,19 @@ const Service = ({ cookies, updateCookieValue }) => {
                         boxSizing: "border-box",
                       }}
                     />
-                    {Object.entries(landmarks).map(([label, { x, y }]) => (
-                      <div
-                        key={`${index}-${label}`}
-                        style={{
-                          position: "absolute",
-                          left: `${x * scale}px`,
-                          top: `${y * scale}px`,
-                          width: "6px",
-                          height: "6px",
-                          backgroundColor: "blue",
-                          borderRadius: "50%",
-                          transform: "translate(-50%, -50%)",
-                        }}
-                        title={label}
-                      />
-                    ))}
+
+                    <div
+                      style={{
+                        position: "absolute",
+                        left: `${boxLeft}px`,
+                        top: `${boxTop - 20}px`,
+                        color: randomColor,
+                        fontWeight: "bold",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {object.label}
+                    </div>
                   </React.Fragment>
                 );
               })}
