@@ -117,6 +117,25 @@ const Service = ({ cookies, updateCookieValue }) => {
     "Face Detector": faceDetector,
   };
 
+  const [imageSize, setImageSize] = useState({ width: 0, height: 0 });
+
+  const handleImageLoad = (e) => {
+    setImageSize({
+      width: e.target.naturalWidth,
+      height: e.target.naturalHeight,
+    });
+  };
+
+  const displayedWidth = 600;
+  const scale = imageSize.width ? displayedWidth / imageSize.width : 1;
+  const displayedHeight = imageSize.height * scale;
+
+  const getRandomColor = () =>
+    "#" +
+    Math.floor(Math.random() * 16777215)
+      .toString(16)
+      .padStart(6, "0");
+
   return (
     <div class="bg-[#ffffff] pr-2 pl-2 sm:pr-5 sm:pl-5 md:pr-10 md:pl-10 flex flex-col h-dvh gap-[15px] items-start justify-start relative">
       <NavBar pageName={"service"} />
@@ -127,12 +146,65 @@ const Service = ({ cookies, updateCookieValue }) => {
             justify-center self-stretch flex-1 relative"
         >
           <div class="h-[auto] w-[auto] right-[-10px] left-0 top-5">
-            <img
-              class="right-[-10px] left-0 top-5"
-              style={{ objectFit: "cover" }}
-              src={link}
-              alt=" "
-            />
+            <div
+              style={{
+                position: "relative",
+                width: `${displayedWidth}px`,
+                height: `${displayedHeight}px`,
+              }}
+            >
+              <img
+                src={link}
+                alt="Detected face"
+                onLoad={handleImageLoad}
+                style={{
+                  objectFit: "cover",
+                  width: `${displayedWidth}px`,
+                  height: `${displayedHeight}px`,
+                }}
+              />
+
+              {faceDetector.map((face, index) => {
+                const { rectangle, landmarks } = face;
+                const boxLeft = rectangle.left * scale;
+                const boxTop = rectangle.top * scale;
+                const boxWidth = (rectangle.right - rectangle.left) * scale;
+                const boxHeight = (rectangle.bottom - rectangle.top) * scale;
+
+                const randomColor = getRandomColor();
+                return (
+                  <React.Fragment key={index}>
+                    <div
+                      style={{
+                        position: "absolute",
+                        left: `${boxLeft}px`,
+                        top: `${boxTop}px`,
+                        width: `${boxWidth}px`,
+                        height: `${boxHeight}px`,
+                        border: `2px solid ${randomColor}`,
+                        boxSizing: "border-box",
+                      }}
+                    />
+                    {Object.entries(landmarks).map(([label, { x, y }]) => (
+                      <div
+                        key={`${index}-${label}`}
+                        style={{
+                          position: "absolute",
+                          left: `${x * scale}px`,
+                          top: `${y * scale}px`,
+                          width: "6px",
+                          height: "6px",
+                          backgroundColor: "blue",
+                          borderRadius: "50%",
+                          transform: "translate(-50%, -50%)",
+                        }}
+                        title={label}
+                      />
+                    ))}
+                  </React.Fragment>
+                );
+              })}
+            </div>
           </div>
         </div>
 
