@@ -150,7 +150,7 @@ const Service = ({ cookies, updateCookieValue }) => {
             >
               <img
                 src={link}
-                alt="Detected face"
+                alt=""
                 onLoad={handleImageLoad}
                 style={{
                   objectFit: "cover",
